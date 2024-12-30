@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tumanina - Pilih Gerakan</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='images/favicon.ico') }}"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="header">
+      <div class="header-content">
+        <h1>Tumanina</h1>
+        <p>Mulailah deteksi gerakan sholat dengan memilih salah satu opsi di bawah ini.</p>
+      </div>
+    </header>
+
+    <!-- Gerakan Cards Section -->
+    <main class="container">
+      <div class="row">
+        {% for movement in movements %}
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-img-wrapper">
+              <img
+                src="{{ url_for('static', filename='images/' + movement + '.png') }}"
+                class="card-img-top"
+                alt="{{ movement }}"
+              />
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title text-capitalize">
+                {{ movement.replace('_', ' ') }}
+              </h5>
+              <a
+                href="{{ url_for('instructions', movement=movement) }}"
+                class="btn btn-primary"
+                >Pilih Gerakan</a
+              >
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+      <p>&copy; 2024 Tumanina - Panduan Sholat</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

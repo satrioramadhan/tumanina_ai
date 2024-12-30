@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doa Gerakan - {{ movement.replace('_', ' ').capitalize() }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/doa.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Judul Doa -->
+      <h1 class="doa-title">
+        Doa {{ movement.replace('_', ' ').capitalize() }}
+      </h1>
+
+      <!-- Bacaan Doa -->
+      <div class="doa-box">
+        <p class="doa-text">{{ doa_text }}</p>
+      </div>
+
+      <!-- Audio Player -->
+      <div class="audio-player">
+        <p>Audio Doa Gerakan:</p>
+        <div class="controls">
+          <button id="play-pause-btn" class="play-btn">▶</button>
+          <input
+            type="range"
+            id="seek-bar"
+            min="0"
+            value="0"
+            step="0.1"
+          />
+        </div>
+        <div class="time-info">
+          <span id="current-time">00:00</span>
+          <span id="total-duration">00:00</span>
+        </div>
+      </div>
+
+      <!-- Audio Elements -->
+      <audio
+        id="initial-audio"
+        src="{{ url_for('static', filename='audio/' + initial_audio) }}"
+        autoplay
+      ></audio>
+      <audio
+        id="doa-audio"
+        src="{{ url_for('static', filename='audio/' + doa_audio) }}"
+      ></audio>
+
+      <!-- Tombol Kembali -->
+      <a href="{{ url_for('index') }}" class="btn">Kembali ke Halaman Utama</a>
+    </div>
+
+    <script>
+      const initialAudio = document.getElementById("initial-audio");
+      const doaAudio = document.getElementById("doa-audio");
+      const playPauseBtn = document.getElementById("play-pause-btn");
+      const seekBar = document.getElementById("seek-bar");
+      const currentTimeElement = document.getElementById("current-time");
+      const totalDurationElement = document.getElementById("total-duration");
+    
+      const formatTime = (timeInSeconds) => {
+        const minutes = Math.floor(timeInSeconds / 60);
+        const seconds = Math.floor(timeInSeconds % 60)
+          .toString()
+          .padStart(2, "0");
+        return `${minutes}:${seconds}`;
+      };
+    
+      let currentAudio = initialAudio; // Audio yang sedang diputar
+    
+      // Set initial state of play/pause button to "pause"
+      playPauseBtn.textContent = "⏸";
+    
+      // Play/pause functionality
+      playPauseBtn.addEventListener("click", () => {
+        if (currentAudio.paused) {
+          currentAudio.play();
+          playPauseBtn.textContent = "⏸"; // Change to pause icon
+        } else {
+          currentAudio.pause();
+          playPauseBtn.textContent = "▶"; // Change to play icon
+        }
+      });
+    
+      // Update total duration
+      doaAudio.addEventListener("loadedmetadata", () => {
+        totalDurationElement.textContent = formatTime(doaAudio.duration);
+        seekBar.max = doaAudio.duration;
+      });
+    
+      // Update progress and seek bar position
+      const updateSeekBar = () => {
+        currentTimeElement.textContent = formatTime(currentAudio.currentTime);
+        seekBar.value = currentAudio.currentTime;
+        requestAnimationFrame(updateSeekBar); // Ensure smooth progress bar movement
+      };
+    
+      currentAudio.addEventListener("play", () => {
+        requestAnimationFrame(updateSeekBar);
+      });
+    
+      // Seek functionality
+      seekBar.addEventListener("input", () => {
+        currentAudio.currentTime = seekBar.value;
+        if (currentAudio.paused) {
+          currentAudio.play();
+          playPauseBtn.textContent = "⏸";
+        }
+      });
+    
+      // Switch to doa audio when initial audio ends
+      initialAudio.addEventListener("ended", () => {
+        currentAudio = doaAudio;
+        playPauseBtn.textContent = "⏸"; // Update button to reflect playing status
+        doaAudio.play();
+      });
+    
+      doaAudio.addEventListener("play", () => {
+        seekBar.max = doaAudio.duration;
+        totalDurationElement.textContent = formatTime(doaAudio.duration);
+        requestAnimationFrame(updateSeekBar);
+      });
+    
+      // Ensure progress bar updates even during autoplay
+      window.addEventListener("DOMContentLoaded", () => {
+        if (!currentAudio.paused) {
+          requestAnimationFrame(updateSeekBar);
+        }
+      });
+    </script>
+    
+    
+  </body>
+</html>

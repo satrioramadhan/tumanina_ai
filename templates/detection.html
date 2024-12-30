@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deteksi Gerakan</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/detection.css') }}"
+    />
+  </head>
+  <body>
+    <div id="camera-container">
+      <!-- Spinner Loading -->
+      <div id="loading-indicator" class="spinner-container hidden">
+        <div class="spinner"></div>
+        <p>Memuat data... Mohon tunggu.</p>
+      </div>
+           
+
+      <!-- Video Stream -->
+      <video
+        id="video-stream"
+        autoplay
+        playsinline
+        data-camera="{{ camera }}"
+        data-movement="{{ movement }}"
+      ></video>
+
+      <!-- Canvas Overlay -->
+      <canvas id="video-overlay"></canvas>
+
+      <!-- Feedback Text -->
+      <div id="feedback">Menginisialisasi kamera...</div>
+
+      <!-- Back Button -->
+      <a id="back-btn" href="{{ url_for('instructions', movement=movement) }}">Kembali</a>
+    </div>
+
+    <!-- Tambahkan library Mediapipe -->
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"
+    ></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+    ></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+    ></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/camera.js') }}"
+    ></script>
+  </body>
+</html>

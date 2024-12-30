@@ -1,0 +1,169 @@
+/* General Styles */
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background-color: #f5f9f6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  
+  /* Header Section */
+  .header {
+    background: linear-gradient(90deg, #6fbf73, #4caf50);
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: slideDown 1s ease-in-out; /* Animasi header */
+  }
+  
+  .header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .header p {
+    font-size: 1.2rem;
+    opacity: 0.85;
+  }
+  
+  /* Card Grid Section */
+  .container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    animation: fadeIn 1.5s ease-in; /* Animasi fade-in untuk container */
+  }
+  
+  .row {
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  /* Card Styles */
+  .card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    animation: popUp 1.5s ease-out; /* Animasi card pop-up */
+  }
+  
+  .card:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-img-wrapper {
+    background-color: #eef7ee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+  }
+  
+  .card img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    padding: 10px;
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #4caf50;
+  }
+  
+  /* Button Styles */
+  .btn-primary {
+    background: linear-gradient(90deg, #4caf50, #388e3c);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    animation: bounce 2s infinite; /* Animasi bounce */
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(90deg, #388e3c, #2e7d32);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Footer Section */
+  footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    background: linear-gradient(90deg, #4caf50, #388e3c);
+    color: white;
+    text-align: center;
+    font-size: 0.9rem;
+    animation: slideUp 1s ease-in-out; /* Animasi footer */
+  }
+  
+  footer p {
+    margin: 0;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes popUp {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  

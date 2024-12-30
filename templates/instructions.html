@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instruksi - {{ movement.replace('_', ' ').capitalize() }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/instructions.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Instruksi Gerakan: {{ movement.replace('_', ' ').capitalize() }}</h1>
+      <div class="description">
+        <p>
+          Pastikan posisi kamera memuat objek sesuai dengan contoh gambar di bawah ini
+          untuk memastikan deteksi berjalan optimal.
+        </p>
+      </div>
+
+      <div class="image-box">
+        <img
+          src="{{ url_for('static', filename='images/guide_' + movement + '.png') }}"
+          alt="Instruksi {{ movement.replace('_', ' ').capitalize() }}"
+        />
+      </div>
+
+      <!-- Accordion untuk Petunjuk Deteksi -->
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-button">Petunjuk Sistem</button>
+          <div class="accordion-content">
+            <p>
+              <b style="color: #2e7d32;">Sistem akan memberikan:</b>
+            </p>
+            <ul>
+              <li>Feedback berupa overlay warna hijau (jika posisi sesuai) atau merah (jika belum sesuai).</li>
+              <li>Keterangan "Posisi sesuai" atau "Posisi belum tepat".</li>
+              <li>
+               Notifikasi suara sebagai feedback.
+              </li>
+            </ul>
+            <div class="audio-buttons">
+              <b style="color: #2e7d32;">Coba notifikasi suara:</b>
+              <button
+                class="btn btn-success"
+                onclick="playAudio('correct.mp3')"
+              >
+                Notifikasi Benar
+              </button>
+              <button class="btn btn-error" onclick="playAudio('error.mp3')">
+                Notifikasi Salah
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion untuk Instruksi Gerakan -->
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-button">Petunjuk Praktek Gerakan</button>
+          <div class="accordion-content">
+            <ul>
+              {% if movement == "takbir" %}
+              <li>Kamera diletakkan pada <b>angle depan</b> sesuaikan jarak perangkat atau kamera dengan objek kurang lebih 1.5 meter, dan tinggi sejajar dengan perut objek. pastikan objek terlihat jelas, seluruh anggota tubuh utuh tidak terpotong dan objek berada di tengah sesuai dengan gambar contoh sebelumnya.</li>
+              <li>Mulai dari <b>posisi siap</b> (sikap berdiri).</li>
+              <li>Lanjutkan dengan <b>mengangkat tangan sejajar dengan daun telinga lalu tangan di sedekapkan di antara dada dan perut dengan tangan kiri di belakang dan tangan kanan di depan</b>.</li>
+              <div class="highlight-note">
+                <p>
+                  Saran: Untuk praktek gerakan takbir:
+                </p>
+                <ol>
+                  <li><b>3 detik</b>: Posisi siap (sikap berdiri).</li>
+                  <li><b>3 detik</b>: Transisi ke posisi takbir.</li>
+                  <li><b>5 detik</b>: Stabilkan posisi akhir (sedekap), agar bacaan doa gerakan <b>{{ movement.replace('_',' ') }}</b> muncul.</li>
+                </ol>
+              </div>
+              {% elif movement == "ruku" %}
+              <li>Kamera diletakkan pada <b>angle samping dengan sisi badan sebelah kanan benghadap ke arah kamera</b> sesuaikan jarak perangkat atau kamera dengan objek kurang lebih 1.5 meter, dan tinggi sejajar dengan perut objek. pastikan objek terlihat jelas, seluruh anggota tubuh utuh tidak terpotong dan objek berada sedikit ke tepi layar agar saat gerakan ruku telah sempurna, objek tidak terpotong sesuai dengan gambar contoh sebelumnya.</li>
+              <li>Mulai dari <b>posisi siap</b> (sedekap).</li>
+              <li>Gerakkan tubuh ke <b>posisi ruku dengan punggung lurus</b>.</li>
+              <div class="highlight-note">
+                <p>
+                  Saran: Untuk praktek gerakan ruku:
+                </p>
+                <ol>
+                  <li><b>3 detik</b>: Posisi siap (sedekap).</li>
+                  <li><b>3 detik</b>: Transisi ke posisi ruku.</li>
+                  <li><b>5 detik</b>: Stabilkan posisi akhir (ruku sempurna), agar bacaan doa gerakan <b>{{ movement.replace('_',' ') }}</b> muncul.</li>
+                </ol>
+              </div>
+              {% elif movement == "itidal" %}
+              <li>Kamera diletakkan pada <b>angle samping dengan sisi badan sebelah kanan benghadap ke arah kamera</b> sesuaikan jarak perangkat atau kamera dengan objek kurang lebih 1.5 meter, dan tinggi sejajar dengan perut objek. pastikan objek terlihat jelas, seluruh anggota tubuh utuh tidak terpotong dan objek berada di tengah sesuai dengan gambar contoh sebelumnya.</li>
+              <li>Mulai dari <b>posisi ruku</b>.</li>
+              <li>Bergerak ke posisi berdiri dengan <b>tangan diangkat sejajar daun telinga</b>.</li>
+              <div class="highlight-note">
+                <p>
+                  Saran: Untuk praktek gerakan itidal:
+                </p>
+                <ol>
+                  <li><b>3 detik</b>: Posisi ruku.</li>
+                  <li><b>3 detik</b>: Transisi ke posisi berdiri (tangan sejajar telinga).</li>
+                  <li><b>5 detik</b>: Stabilkan posisi akhir (posisi siap), agar bacaan doa gerakan <b>{{ movement.replace('_',' ') }}</b> muncul.</li>
+                </ol>
+              </div>
+              {% elif movement == "sujud" %}
+              <li>Kamera diletakkan pada <b>angle samping</b> sesuaikan jarak perangkat atau kamera dengan objek kurang lebih 1.5 meter, dan tinggi sejajar dengan perut objek. pastikan objek terlihat jelas, seluruh anggota tubuh utuh tidak terpotong dan objek berada sedikit ke tepi layar agar saat gerakan sujud telah sempurna, objek tidak terpotong sesuai dengan gambar contoh sebelumnya.</li>
+              <li>Mulai dari <b>posisi itidal</b>.</li>
+              <li>Bergerak menuju posisi sujud dengan <b>siku tidak menyentuh lantai</b>.</li>
+              <div class="highlight-note">
+                <p>
+                  Saran: Untuk praktek gerakan sujud:
+                </p>
+                <ol>
+                  <li><b>3 detik</b>: Posisi itidal.</li>
+                  <li><b>3 detik</b>: Transisi ke posisi sujud.</li>
+                  <li><b>5 detik</b>: Stabilkan posisi akhir (sujud sempurna), agar bacaan doa gerakan <b>{{ movement.replace('_',' ') }}</b> muncul.</li>
+                </ol>
+              </div>
+              {% elif movement == "duduk_dua_sujud" %}
+              <li>Kamera diletakkan pada <b>angle belakang</b> sesuaikan jarak perangkat atau kamera dengan objek kurang lebih 1 meter, dan tinggi sejajar dengan sikut objek. pastikan objek terlihat jelas, seluruh anggota tubuh utuh tidak terpotong dan objek berada di tengah sesuai dengan gambar contoh sebelumnya.</li>
+              <li>Mulai dari <b>posisi sujud</b>.</li>
+              <li>Bergerak menuju <b>posisi duduk dengan kaki kanan tegak</b>.</li>
+              <div class="highlight-note">
+                <p>
+                  Saran: Untuk praktek gerakan duduk dua sujud:
+                </p>
+                <ol>
+                  <li><b>3 detik</b>: Posisi sujud.</li>
+                  <li><b>3 detik</b>: Transisi ke posisi duduk.</li>
+                  <li><b>5 detik</b>: Stabilkan posisi akhir (duduk sempurna), agar bacaan doa gerakan <b>{{ movement.replace('_',' ') }}</b> muncul.</li>
+                </ol>
+              </div>
+              {% elif movement == "tahiyat_awwal" %}
+              <li>Kamera diletakkan pada <b>angle belakang</b>, sesuaikan jarak perangkat atau kamera dengan objek kurang lebih 1 meter, dan tinggi sejajar dengan sikut objek. pastikan objek terlihat jelas, seluruh anggota tubuh utuh tidak terpotong dan objek berada di tengah sesuai dengan gambar contoh sebelumnya.</li>
+              <li>Mulai dari <b>posisi sujud</b>.</li>
+              <li>Bergerak menuju <b>posisi tahiyat awwal dengan kaki kanan tegak dan kaki kiri tidak tegak</b>.</li>
+              <div class="highlight-note">
+                <p>
+                  Saran: Untuk praktek gerakan tahiyat awwal:
+                </p>
+                <ol>
+                  <li><b>3 detik</b>: Posisi sujud.</li>
+                  <li><b>3 detik</b>: Transisi ke posisi tahiyat awwal.</li>
+                  <li><b>5 detik</b>: Stabilkan posisi akhir (tahiyat awwal sempurna), agar bacaan doa gerakan <b>{{ movement.replace('_',' ') }}</b> muncul.</li>
+                </ol>
+              </div>
+              {% elif movement == "tahiyat_akhir" %}
+              <li>Kamera diletakkan pada <b>angle belakang</b>, sesuaikan jarak perangkat atau kamera dengan objek kurang lebih 1 meter, dan tinggi sejajar dengan sikut objek. pastikan objek terlihat jelas, seluruh anggota tubuh utuh tidak terpotong dan objek berada di tengah sesuai dengan gambar contoh sebelumnya.</li>
+              <li>Mulai dari <b>posisi sujud</b>.</li>
+              <li>Bergerak menuju <b>posisi tahiyat akhir dengan kaki kanan tegak dan kaki kiri disilangkan dengan kaki kanan</b>.</li>
+              <div class="highlight-note">
+                <p>
+                  Saran: Untuk praktek gerakan tahiyat akhir:
+                </p>
+                <ol>
+                  <li><b>3 detik</b>: Posisi sujud.</li>
+                  <li><b>3 detik</b>: Transisi ke posisi tahiyat akhir.</li>
+                  <li><b>5 detik</b>: Stabilkan posisi akhir (tahiyat akhir sempurna), agar bacaan doa gerakan <b>{{ movement.replace('_',' ') }}</b> muncul.</li>
+                </ol>
+              </div>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>      
+
+      <h2>Pilih Kamera</h2>
+      <div class="button-group">
+        <a
+          href="{{ url_for('detection', movement=movement, camera='front') }}"
+          class="btn"
+          >Kamera Depan</a
+        >
+        <a
+          href="{{ url_for('detection', movement=movement, camera='back') }}"
+          class="btn"
+          >Kamera Belakang</a
+        >
+      </div>
+      <a href="{{ url_for('index') }}" class="btn btn-secondary">Kembali</a>
+    </div>
+
+    <script>
+      // Fungsi untuk memainkan audio notifikasi
+      function playAudio(audioFile) {
+        const audio = new Audio(`/static/audio/${audioFile}`);
+        audio.play().catch((error) => {
+          console.error("Gagal memutar audio:", error);
+        });
+      }
+
+      // Script untuk accordion
+      document.querySelectorAll(".accordion-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const content = button.nextElementSibling;
+          button.classList.toggle("active");
+
+          if (button.classList.contains("active")) {
+            content.style.maxHeight = content.scrollHeight + "px";
+          } else {
+            content.style.maxHeight = 0;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

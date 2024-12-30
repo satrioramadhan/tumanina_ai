@@ -1,0 +1,117 @@
+/* Atur body agar elemen tetap di tengah dan tidak ada scroll */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f9f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+h1.doa-title {
+  color: #4caf50;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.doa-box {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: justify;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  color: #333333;
+}
+
+.audio-player {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.play-btn {
+  font-size: 1.2rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
+}
+
+.play-btn:hover {
+  background-color: #388e3c;
+}
+
+#seek-bar {
+  width: 70%;
+  cursor: pointer;
+  appearance: none;
+  height: 8px;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+  overflow: hidden;
+}
+
+#seek-bar::-webkit-slider-thumb {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#seek-bar::-webkit-slider-thumb:hover {
+  background-color: #388e3c;
+}
+
+.time-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.time-info span {
+  font-size: 0.9rem;
+  color: #555555;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #388e3c;
+}
